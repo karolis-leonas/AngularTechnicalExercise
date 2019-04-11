@@ -1,0 +1,14 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<mat-toolbar color="primary" class="navbar-fixed mat-elevation-z2">
+    <div fxLayout="row" fxShow.gt-sm>
+        <button id="tableButton" mat-button [routerLink]="['/']" *ngIf="checkIfLoggedIn()">Table</button>
+    </div>
+    <span class="fill-space"></span>
+    <span>
+        <div fxLayout="row" fxShow.gt-sm>
+            <button mat-button [routerLink]="['/login']" *ngIf="checkIfLoggedIn()" (click)="logout()">Logout</button>
+            <button mat-button [routerLink]="['/login']" *ngIf="!checkIfLoggedIn()" (click)="logout()">Login</button>
+            <button mat-button [routerLink]="['/register']" *ngIf="!checkIfLoggedIn()" (click)="logout()">Register</button>
+        </div>
+    </span>
+</mat-toolbar>

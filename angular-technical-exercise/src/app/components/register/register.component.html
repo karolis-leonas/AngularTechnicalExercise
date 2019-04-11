@@ -1,0 +1,40 @@
+﻿<div class="register-form">
+    <h2>Register</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <mat-form-field class="example-full-width" [ngClass]="{ 'has-error': email.touched && !email.valid }">
+            <input matInput
+              placeholder="Email"
+              name="email"
+              type="text"
+              formControlName="email" class="form-control">
+            <mat-error *ngIf="(email.touched || submitted) && email.errors && email.errors.required">Email is required</mat-error>
+            <mat-error *ngIf="submitted && email.errors && email.errors.pattern">Email has incorrect pattern</mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" [ngClass]="{ 'has-error': password.touched && !password.valid }">
+            <input matInput
+              placeholder="Password"
+              name="password"
+              type="password"
+              formControlName="password" class="form-control">
+              <div *ngIf="submitted && password.errors"></div>
+            <mat-error *ngIf="(password.touched || submitted) && password.errors && password.errors.required">Password is required</mat-error>
+            <mat-error *ngIf="submitted && password.errors && password.errors.pattern">Password has incorrect pattern</mat-error>
+            <mat-error *ngIf="submitted && confirmPassword.errors && confirmPassword.errors.matchOther">Password fields do not match.</mat-error>
+
+        </mat-form-field>
+        <mat-form-field class="example-full-width" [ngClass]="{ 'has-error': password.touched && !password.valid }">
+            <input matInput
+              placeholder="Confirm password"
+              name="confirmPassword"
+              type="password"
+              formControlName="confirmPassword" class="form-control">
+              <div *ngIf="submitted && confirmPassword.errors"></div>
+            <mat-error *ngIf="(confirmPassword.touched || submitted) && confirmPassword.errors && confirmPassword.errors.required">Repeated password is required</mat-error>
+            <mat-error *ngIf="submitted && password.errors && confirmPassword.errors.pattern">Confirmed password has incorrect pattern</mat-error>
+            <mat-error *ngIf="submitted && confirmPassword.errors && confirmPassword.errors.matchOther">Password fields do not match.</mat-error>
+        </mat-form-field>
+        <div>
+            <button mat-raised-button class="register-button" id="registerButton" mat-button [disabled]="loading">Register</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,26 @@
+﻿.register-form {
+  margin: auto;
+  width: 100%;
+  max-width: 500px;
+  padding: 10px;
+}
+
+.mat-form-field {
+  width: 100%;
+  padding: 5px;
+}
+
+h2 {
+  padding: 10px 5px;
+}
+
+.register-button {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 100px;
+  height: 50px;
+  width: 40%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
