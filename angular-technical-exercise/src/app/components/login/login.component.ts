@@ -4,8 +4,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from '../../services/authentication.service';
-import { AlertService } from '../../services/alert.service';
-
 
 @Component({
   templateUrl: 'login.component.html',
@@ -17,15 +15,15 @@ export class LoginComponent implements OnInit {
     submitted = false;
     returnUrl: string;
     applicationConstants = ApplicationConstants;
+    errorMessage: string = null;
 
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private authenticationService: AuthenticationService,
-        private alertService: AlertService
+        private _authenticationService: AuthenticationService
     ) {
-        if (this.authenticationService.currentUserValue) {
+        if (this._authenticationService.currentUserValue) {
             this.router.navigate(['/']);
         }
     }
@@ -57,20 +55,20 @@ export class LoginComponent implements OnInit {
 
     onSubmit(): void {
         this.submitted = true;
-        console.log(this.email);
-        console.log(this.password);
+        this.errorMessage = null;
+
         if (this.loginForm.invalid) {
             return;
         }
         this.loading = true;
-        this.authenticationService.login(this.email.value, this.password.value)
+        this._authenticationService.login(this.email.value, this.password.value)
             .pipe(first())
             .subscribe(
                 (data: any) => {
                     this.router.navigate([this.returnUrl]);
                 },
                 (error: any) => {
-                    this.alertService.error(error);
+                    this.errorMessage = error;
                     this.loading = false;
                 });
     }

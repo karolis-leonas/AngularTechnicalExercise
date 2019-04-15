@@ -1,9 +1,29 @@
-﻿<h1>Hi {{currentUser.email}}!</h1>
-<p>You're logged in with Angular 7!!</p>
-<h3>All registered users:</h3>
-<ul>
-    <li *ngFor="let user of users">
-        {{user.email}}
-        - <a (click)="deleteUser(user.id)" class="text-danger">Delete</a>
-    </li>
-</ul>
+﻿<div class="table-window">
+    <div>
+        <button mat-raised-button id="addValueButton" mat-button>Add new value</button>
+        <button mat-raised-button id="addColumnButton" mat-button (click)="openDialog()">Add new column</button>
+    </div>
+
+    <div class="data-table mat-elevation-z8">
+        <mat-table #table [dataSource]="dataSource" matSort>
+          <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>{{ column.header }}</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{ column.cell(row) }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+              <mat-header-cell *matHeaderCellDef></mat-header-cell>
+              <mat-cell *matCellDef="let row" >
+                <div class="action-buttons">
+                    <button mat-raised-button>Edit</button>
+                    <button mat-raised-button>Delete</button>
+                </div>
+              </mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+        </mat-table>
+      </div>
+</div>

@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { NavigationMenuComponent } from './navigation-menu.component';
+import { AddColumnDialogComponent } from './add-column-dialog.component';
 
-describe('NavigationMenuComponent', () => {
-  let component: NavigationMenuComponent;
-  let fixture: ComponentFixture<NavigationMenuComponent>;
+describe('AddColumnDialogComponent', () => {
+  let component: AddColumnDialogComponent;
+  let fixture: ComponentFixture<AddColumnDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NavigationMenuComponent ]
+      declarations: [ AddColumnDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NavigationMenuComponent);
+    fixture = TestBed.createComponent(AddColumnDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

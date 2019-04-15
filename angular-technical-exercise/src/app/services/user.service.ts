@@ -12,12 +12,9 @@ export class UserService {
         return this.http.get<User[]>(`${environment.apiUrl}/users`);
     }
 
-    getById(id: number) {
-        return this.http.get(`${environment.apiUrl}/users/${id}`);
-    }
-
-    register(user: User) {
-        return this.http.post(`${environment.apiUrl}/users/register`, user);
+    register(email: string, password: string) {
+        const newUser: User = { email: email, password: password };
+        return this.http.post(`${environment.apiUrl}/users/register`, newUser);
     }
 
     update(user: User) {

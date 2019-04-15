@@ -19,6 +19,7 @@ export class RegisterComponent implements OnInit {
     loading = false;
     submitted = false;
     applicationConstants = ApplicationConstants;
+    errorMessage: string = null;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -79,16 +80,15 @@ export class RegisterComponent implements OnInit {
         }
 
         this.loading = true;
-        this.userService.register(this.registerForm.value)
+        this.userService.register(this.email.value, this.password.value)
             .pipe(first())
             .subscribe(
-                data => {
-                    this.alertService.success('Registration successful', true);
+                (data) => {
                     this.router.navigate(['/login']);
                 },
-                error => {
-                    this.alertService.error(error);
-                    this.loading = false;
+                (error) => {
+                  this.errorMessage = error;
+                  this.loading = false;
                 });
     }
 }

@@ -18,9 +18,8 @@
               formControlName="password" class="form-control">
               <div *ngIf="submitted && password.errors"></div>
             <mat-error *ngIf="(password.touched || submitted) && password.errors && password.errors.required">Password is required</mat-error>
-            <mat-error *ngIf="submitted && password.errors && password.errors.pattern">Password has incorrect pattern</mat-error>
+            <mat-error *ngIf="(password.touched || submitted) && password.errors && password.errors.pattern">Password has incorrect pattern</mat-error>
             <mat-error *ngIf="submitted && confirmPassword.errors && confirmPassword.errors.matchOther">Password fields do not match.</mat-error>
-
         </mat-form-field>
         <mat-form-field class="example-full-width" [ngClass]="{ 'has-error': password.touched && !password.valid }">
             <input matInput
@@ -30,9 +29,12 @@
               formControlName="confirmPassword" class="form-control">
               <div *ngIf="submitted && confirmPassword.errors"></div>
             <mat-error *ngIf="(confirmPassword.touched || submitted) && confirmPassword.errors && confirmPassword.errors.required">Repeated password is required</mat-error>
-            <mat-error *ngIf="submitted && password.errors && confirmPassword.errors.pattern">Confirmed password has incorrect pattern</mat-error>
+            <mat-error *ngIf="(confirmPassword.touched || submitted) && password.errors && confirmPassword.errors.pattern">Confirmed password has incorrect pattern</mat-error>
             <mat-error *ngIf="submitted && confirmPassword.errors && confirmPassword.errors.matchOther">Password fields do not match.</mat-error>
         </mat-form-field>
+        <mat-error *ngIf="errorMessage">
+          * {{errorMessage}}
+        </mat-error>
         <div>
             <button mat-raised-button class="register-button" id="registerButton" mat-button [disabled]="loading">Register</button>
         </div>

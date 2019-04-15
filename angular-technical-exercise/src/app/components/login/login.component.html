@@ -1,7 +1,7 @@
 ﻿<div class="login-form">
     <h2>Login</h2>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <mat-form-field class="example-full-width" [ngClass]="{ 'has-error': email.touched && !email.valid }">
+        <mat-form-field class="example-full-width" [ngClass]="{ 'has-error': (email.touched && !email.valid) }">
             <input matInput
               placeholder="Email"
               name="email"
@@ -10,7 +10,7 @@
             <mat-error *ngIf="(email.touched || submitted) && email.errors && email.errors.required">Email is required</mat-error>
             <mat-error *ngIf="submitted && email.errors && email.errors.pattern">Email has incorrect pattern</mat-error>
         </mat-form-field>
-        <mat-form-field class="example-full-width" [ngClass]="{ 'has-error': password.touched && !password.valid }">
+        <mat-form-field class="example-full-width" [ngClass]="{ 'has-error': (password.touched && !password.valid) }">
             <input matInput
               placeholder="Password"
               name="password"
@@ -20,6 +20,9 @@
             <mat-error *ngIf="(password.touched || submitted) && password.errors && password.errors.required">Password is required</mat-error>
             <mat-error *ngIf="submitted && password.errors && password.errors.pattern">Password has incorrect pattern</mat-error>
         </mat-form-field>
+        <mat-error *ngIf="errorMessage">
+          * {{errorMessage}}
+        </mat-error>
         <div>
             <button mat-raised-button class="login-button" id="loginButton" mat-button [disabled]="loading">Login</button>
         </div>

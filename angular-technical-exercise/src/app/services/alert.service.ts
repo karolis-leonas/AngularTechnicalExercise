@@ -4,7 +4,9 @@ import { Observable, Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AlertService {
-    private subject = new Subject<any>();
+    private successfulSubject = new Subject<any>();
+    private errorSubject = new Subject<any>();
+
     private keepAfterNavigationChange = false;
 
     constructor(private router: Router) {
@@ -15,8 +17,8 @@ export class AlertService {
                     // only keep for a single location change
                     this.keepAfterNavigationChange = false;
                 } else {
-                    // clear alert
-                    this.subject.next();
+                    this.successfulSubject.next();
+                    this.errorSubject.next();
                 }
             }
         });
@@ -26,17 +28,20 @@ export class AlertService {
         this.keepAfterNavigationChange = keepAfterNavigationChange;
         let successfulObject = { type: 'success', text: message };
         console.log(successfulObject);
-        this.subject.next({ type: 'success', text: message });
+        this.successfulSubject.next({ type: 'success', text: message });
     }
 
     error(message: string, keepAfterNavigationChange = false) {
         this.keepAfterNavigationChange = keepAfterNavigationChange;
         let errorObject = { type: 'error', text: message };
-        console.log(errorObject);
-        this.subject.next(errorObject);
+        this.errorSubject.next(errorObject);
     }
 
-    getMessage(): Observable<any> {
-        return this.subject.asObservable();
+    getSuccessMessage(): Observable<any> {
+      return this.successfulSubject.asObservable();
+    }
+
+    getErrorMessage(): Observable<any> {
+        return this.errorSubject.asObservable();
     }
 }

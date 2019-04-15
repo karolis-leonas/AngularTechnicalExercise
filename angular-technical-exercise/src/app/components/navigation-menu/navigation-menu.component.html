@@ -1,7 +1,8 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <mat-toolbar color="primary" class="navbar-fixed mat-elevation-z2">
     <div fxLayout="row" fxShow.gt-sm>
-        <button id="tableButton" mat-button [routerLink]="['/']" *ngIf="checkIfLoggedIn()">Table</button>
+        <button id="tableButton" mat-button [routerLink]="['/']" *ngIf="checkIfLoggedIn()">Main table</button>
+        <button id="userButton" mat-button [routerLink]="['/userlist']" *ngIf="checkIfLoggedIn()">All users</button>
     </div>
     <span class="fill-space"></span>
     <span>

@@ -13,15 +13,13 @@ export class NavigationMenuComponent {
   returnUrl: string;
 
   constructor(
-      private route: ActivatedRoute,
-      private router: Router,
-      private authenticationService: AuthenticationService) { }
+      private _authenticationService: AuthenticationService) { }
 
-  private logout() {
-      this.authenticationService.logout();
+  logout() {
+      this._authenticationService.logout();
   }
 
   public checkIfLoggedIn() {
-      return (this.authenticationService.checkIfLoggedIn() != null);
+      return (this._authenticationService.checkIfLoggedIn() != null);
   }
 }

@@ -1,4 +1,5 @@
-﻿import { NgModule } from '@angular/core';
+﻿import { AddColumnDialogComponent } from './components/dialogs/add-column-dialog/add-column-dialog.component';
+import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -14,6 +15,13 @@ import { RegisterComponent } from './components/register/register.component';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { ErrorInterceptor } from './helpers/error.interceptor';
 import { fakeBackendProvider } from './helpers/fake-backend';
+import { UserListComponent } from './components/user-list/user-list.component';
+import { CdkColumnDef } from '@angular/cdk/table';
+import { TableService } from './services/table.service';
+import { AuthenticationService } from './services/authentication.service';
+import { AlertService } from './services/alert.service';
+import { InactivityService } from './services/inactivity.service';
+import { UserService } from './services/user.service';
 
 @NgModule({
     imports: [
@@ -29,14 +37,22 @@ import { fakeBackendProvider } from './helpers/fake-backend';
         HomeComponent,
         LoginComponent,
         RegisterComponent,
-        NavigationMenuComponent
+        NavigationMenuComponent,
+        UserListComponent,
+        AddColumnDialogComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-
-        fakeBackendProvider
+        CdkColumnDef,
+        fakeBackendProvider,
+        TableService,
+        AuthenticationService,
+        AlertService,
+        InactivityService,
+        UserService
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    entryComponents: [AddColumnDialogComponent]
 })
 export class AppModule { }
