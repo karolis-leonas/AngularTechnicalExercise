@@ -45,7 +45,15 @@ export class AddColumnDialogComponent implements OnInit {
         return;
     }
     this.loading = true;
-    this._tableService.saveNewColumn(this.columnName.value);
-    this.dialogRef.close();
+    this._tableService.saveNewColumn(this.columnName.value).subscribe(
+      (result) => {
+        console.log(result);
+        this.dialogRef.close();
+      },
+      (error) => {
+        console.error(error);
+        this.errorMessage = error;
+      }
+    )
   }
 }

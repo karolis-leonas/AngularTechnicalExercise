@@ -47,3 +47,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .main-content {
   margin-top: 64px;
 }
+
+.cdk-overlay-pane {
+  width: 75vw !important;
+  max-width: 400px !important;
+}

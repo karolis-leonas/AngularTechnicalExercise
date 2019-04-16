@@ -1,4 +1,5 @@
-﻿import { AddColumnDialogComponent } from './components/dialogs/add-column-dialog/add-column-dialog.component';
+﻿import { AddCountryDialogComponent } from './components/dialogs/add-country-dialog/add-country-dialog.component';
+import { AddColumnDialogComponent } from './components/dialogs/add-column-dialog/add-column-dialog.component';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
@@ -19,7 +20,6 @@ import { UserListComponent } from './components/user-list/user-list.component';
 import { CdkColumnDef } from '@angular/cdk/table';
 import { TableService } from './services/table.service';
 import { AuthenticationService } from './services/authentication.service';
-import { AlertService } from './services/alert.service';
 import { InactivityService } from './services/inactivity.service';
 import { UserService } from './services/user.service';
 
@@ -39,7 +39,8 @@ import { UserService } from './services/user.service';
         RegisterComponent,
         NavigationMenuComponent,
         UserListComponent,
-        AddColumnDialogComponent
+        AddColumnDialogComponent,
+        AddCountryDialogComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
@@ -48,11 +49,10 @@ import { UserService } from './services/user.service';
         fakeBackendProvider,
         TableService,
         AuthenticationService,
-        AlertService,
         InactivityService,
         UserService
     ],
     bootstrap: [AppComponent],
-    entryComponents: [AddColumnDialogComponent]
+    entryComponents: [AddColumnDialogComponent, AddCountryDialogComponent]
 })
 export class AppModule { }

@@ -1,6 +1,6 @@
 export class CountryModel {
-  name: string;
-  phoneCode: number;
-  countryCode: string;
-  additionalData: any;
+  name: string = null;
+  phoneCode: number = null;
+  countryCode: string = null;
+  additionalData: any = {};
 }

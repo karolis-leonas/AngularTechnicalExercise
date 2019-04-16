@@ -1,0 +1,40 @@
+<div>
+  <h3 mat-dialog-title *ngIf="!dialogData.isEdited">Add new country</h3>
+  <h3 mat-dialog-title *ngIf="dialogData.isEdited">Edit existing country</h3>
+  <form [formGroup]="countryForm">
+    <mat-dialog-content>
+        <mat-form-field>
+          <input matInput placeholder="Name" formControlName="name">
+          <mat-error *ngIf="name.errors && name.errors.required">Name is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Country code" formControlName="countryCode">
+          <mat-error *ngIf="countryCode.errors && countryCode.errors.required">Column name is required</mat-error>
+          <mat-error *ngIf="countryCode.errors && (countryCode.errors.minlength || countryCode.errors.maxlength)">Country code length must be preicsely 2</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput type="number" placeholder="Phone code" formControlName="phoneCode">
+          <mat-error *ngIf="phoneCode.errors && phoneCode.errors.required">Phone code is required</mat-error>
+        </mat-form-field>
+
+        <div formGroupName="additionalData">
+            <ng-container *ngFor="let additionalColumn of dialogData.additionalColumns">
+              <mat-form-field>
+                <input matInput placeholder="{{additionalColumn}}" formControlName="{{additionalColumn}}">
+              </mat-form-field>
+            </ng-container>
+        </div>
+    </mat-dialog-content>
+
+    <mat-error *ngIf="errorMessage">
+      * {{errorMessage}}
+    </mat-error>
+
+    <mat-dialog-actions>
+        <button class="mat-raised-button" type="button" (click)="closeModal()">Close</button>
+        <button class="mat-raised-button" (click)="onSubmit()">Save</button>
+    </mat-dialog-actions>
+  </form>
+</div>

@@ -12,3 +12,7 @@
 .action-buttons {
   text-align: right;
 }
+
+.action-button-width {
+  max-width: 200px;
+}

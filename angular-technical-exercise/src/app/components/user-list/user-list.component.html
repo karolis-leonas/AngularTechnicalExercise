@@ -1,9 +1,8 @@
-<h1>Hi {{currentUser.email}}!</h1>
-<p>You're logged in with Angular 7!!</p>
-<h3>All registered users:</h3>
-<ul>
-    <li *ngFor="let user of users">
-        {{user.email}}
-        - <a (click)="deleteUser(user.id)" class="text-danger">Delete</a>
-    </li>
-</ul>
+<div class="table-window">
+    <h3>All registered users:</h3>
+    <mat-list class="user-view">
+        <mat-list-item *ngFor="let user of users">
+            {{user.email}}&nbsp;<button mat-raised-button (click)="deleteUser(user.id)" class="text-danger">Delete</button>
+        </mat-list-item>
+    </mat-list>
+</div>

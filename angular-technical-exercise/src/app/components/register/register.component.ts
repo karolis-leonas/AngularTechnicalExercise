@@ -6,7 +6,6 @@ import { first } from 'rxjs/operators';
 import { InputMatchValidator } from '../../validators/password-match-validator';
 import { AuthenticationService } from '../../services/authentication.service';
 import { UserService } from '../../services/user.service';
-import { AlertService } from '../../services/alert.service';
 
 @Component(
   {
@@ -25,8 +24,7 @@ export class RegisterComponent implements OnInit {
         private formBuilder: FormBuilder,
         private router: Router,
         private authenticationService: AuthenticationService,
-        private userService: UserService,
-        private alertService: AlertService
+        private userService: UserService
     ) {
         // redirect to home if already logged in
         if (this.authenticationService.currentUserValue) {
