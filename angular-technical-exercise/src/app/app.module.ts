@@ -22,6 +22,7 @@ import { TableService } from './services/table.service';
 import { AuthenticationService } from './services/authentication.service';
 import { InactivityService } from './services/inactivity.service';
 import { UserService } from './services/user.service';
+import { ColumnDeleteConfirmationComponent } from './components/dialogs/column-delete-confirmation/column-delete-confirmation.component';
 
 @NgModule({
     imports: [
@@ -40,7 +41,8 @@ import { UserService } from './services/user.service';
         NavigationMenuComponent,
         UserListComponent,
         AddColumnDialogComponent,
-        AddCountryDialogComponent
+        AddCountryDialogComponent,
+        ColumnDeleteConfirmationComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
@@ -53,6 +55,6 @@ import { UserService } from './services/user.service';
         UserService
     ],
     bootstrap: [AppComponent],
-    entryComponents: [AddColumnDialogComponent, AddCountryDialogComponent]
+    entryComponents: [AddColumnDialogComponent, AddCountryDialogComponent, ColumnDeleteConfirmationComponent]
 })
 export class AppModule { }

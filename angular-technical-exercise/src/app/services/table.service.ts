@@ -113,6 +113,22 @@ export class TableService {
     this._countriesSubject.next(this._countries);
   }
 
+  public deleteColumn(deletedColumnName: string): Observable<string> {
+    if (this._countries && this._countries.length > 0) {
+      this._countries.forEach((country) => {
+        if (country.additionalData && country.additionalData[deletedColumnName] !== undefined) {
+          delete country.additionalData[deletedColumnName];
+        }
+      });
+
+      localStorage.setItem('tableData', JSON.stringify(this._countries));
+      this._countriesSubject.next(this._countries);
+      return of(deletedColumnName);
+    } else {
+      return throwError('Unexpected error when deleting column data.');
+    }
+  }
+
   private mapCountryData(unmappedItems: any): Array<CountryModel> {
     const mappedCountries: CountryModel[] = [];
 

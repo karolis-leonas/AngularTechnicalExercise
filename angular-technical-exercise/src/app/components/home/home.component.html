@@ -1,7 +1,21 @@
 ﻿<div class="table-window">
-    <div>
-        <button mat-raised-button id="addValueButton" mat-button (click)="openCountryDialog(false, null)">Add new value</button>
-        <button mat-raised-button id="addColumnButton" mat-button (click)="openColumnDialog()">Add new column</button>
+    <div class="table-action-bar">
+        <div class="table-action-buttons">
+          <button mat-raised-button mat-button (click)="openCountryDialog(false, null)">Add</button>
+          <button mat-raised-button mat-button (click)="openColumnDialog()">Add column</button>
+        </div>
+        <div class="column-deletion-actions" *ngIf="additionalColumnNames && additionalColumnNames.length > 0">
+            <mat-form-field class="column-deletion-width">
+                <mat-label>Select column</mat-label>
+                <mat-select [(value)]="columnToBeDeleted">
+                  <mat-option *ngFor="let additionalColumn of additionalColumnNames" [value]="additionalColumn">
+                    {{additionalColumn}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            <button mat-raised-button mat-button [disabled]="!columnToBeDeleted"
+              (click)="deleteColumn()">Delete column</button>
+        </div>
     </div>
 
     <div class="data-table mat-elevation-z8">
@@ -14,7 +28,7 @@
           <ng-container matColumnDef="actions" class="action-button-width">
               <mat-header-cell class="action-button-width" *matHeaderCellDef></mat-header-cell>
               <mat-cell class="action-button-width" *matCellDef="let row" >
-                <div class="action-buttons">
+                <div class="row-action-buttons">
                     <button mat-raised-button (click)="openCountryDialog(true, row)">Edit</button>
                     <button mat-raised-button (click)="deleteCountry(row.countryCode)">Delete</button>
                 </div>

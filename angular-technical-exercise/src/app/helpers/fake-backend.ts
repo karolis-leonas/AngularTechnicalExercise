@@ -39,6 +39,26 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 }
             }
 
+            if (request.url.endsWith('/users/register') && request.method === 'POST') {
+              let newUser = request.body;
+
+               // validation
+              let duplicateUser = users.filter(user => { return user.email === newUser.email; }).length;
+              if (duplicateUser) {
+                  return throwError({
+                    error:  { message: `Email ${newUser.email} is already taken` }
+                  });
+              }
+
+               // save new user
+              newUser.id = users.length + 1;
+              users.push(newUser);
+              localStorage.setItem('users', JSON.stringify(users));
+
+               // respond 200 OK
+              return of(new HttpResponse({ status: 200 }));
+          }
+
             if (request.url.match(/\/users\/\d+$/) && request.method === 'DELETE') {
                 if (request.headers.get('Authorization') === 'Bearer fake-jwt-token') {
                     let urlParts = request.url.split('/');

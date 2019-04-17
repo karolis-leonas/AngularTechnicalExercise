@@ -61,10 +61,10 @@ export class AddCountryDialogComponent implements OnInit {
         return;
     }
     this.loading = true;
-    console.log(this.countryForm.value);
     if (this.oldCountryCode) {
       this._tableService.updateExistingCountry(this.countryForm.value, this.oldCountryCode).subscribe(
         (result) => {
+          console.log('Updated country');
           console.log(result);
           this.dialogRef.close();
         },
@@ -75,6 +75,7 @@ export class AddCountryDialogComponent implements OnInit {
     } else {
       this._tableService.createNewCountry(this.countryForm.value).subscribe(
         (result) => {
+          console.log('Created country');
           console.log(result);
           this.dialogRef.close();
         },

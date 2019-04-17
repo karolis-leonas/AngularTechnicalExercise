@@ -1,5 +1,5 @@
-﻿.mat-raised-button {
-  margin: 10px;
+﻿.mat-raised-button, .mat-form-field {
+  margin: 5px;
 }
 
 .data-table {
@@ -9,10 +9,30 @@
   overflow-y: scroll;
 }
 
-.action-buttons {
+.row-action-buttons {
   text-align: right;
 }
 
 .action-button-width {
   max-width: 200px;
+}
+
+.column-deletion-dropdown {
+  max-width: 400px;
+  margin-top: 0;
+}
+
+.table-action-bar {
+  margin: 10px 5px;
+  display: flex;
+  justify-content: space-between;
+  height: 60px;
+}
+
+.table-action-buttons {
+  display: flex;
+}
+
+.column-deletion-actions {
+  display: flex;
 }

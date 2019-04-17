@@ -1,4 +1,5 @@
-﻿import { AddCountryDialogComponent } from './../dialogs/add-country-dialog/add-country-dialog.component';
+﻿import { ColumnDeleteConfirmationComponent } from './../dialogs/column-delete-confirmation/column-delete-confirmation.component';
+import { AddCountryDialogComponent } from './../dialogs/add-country-dialog/add-country-dialog.component';
 import { AddColumnDialogComponent } from '../dialogs/add-column-dialog/add-column-dialog.component';
 import { ApplicationConstants } from './../../constants/application-constants';
 import { ColumnModel } from './../../models/column.model';
@@ -20,12 +21,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     columns: ColumnModel[] = [];
     displayedColumns: string[];
     additionalColumnNames: string[];
+    columnToBeDeleted: string;
     @ViewChild(MatSort) sort: MatSort;
 
     constructor(
       private _tableService: TableService,
       private _addColumnDialog: MatDialog,
-      private _addCountryDialog: MatDialog
+      private _addCountryDialog: MatDialog,
+      private _deleteColumnDialog: MatDialog
     ) { }
 
     ngOnInit() {
@@ -71,8 +74,34 @@ export class HomeComponent implements OnInit, OnDestroy {
       this._tableService.deleteCountry(countryCode);
     }
 
+    deleteColumn(): void {
+      if (this.dataSource.data && this.dataSource.data.length > 0) {
+        let columnHavingDataIndex = this.dataSource.data.findIndex((country: CountryModel) => {
+          return ((country.additionalData[this.columnToBeDeleted] !== null) && (country.additionalData[this.columnToBeDeleted] !== ''));
+        });
+
+        if (columnHavingDataIndex >= 0) {
+          const deleteConfirmationDialog = this._deleteColumnDialog.open(ColumnDeleteConfirmationComponent, {
+            data: this.columnToBeDeleted
+          });
+        } else {
+        this._tableService.deleteColumn(this.columnToBeDeleted).subscribe(
+          (result) => {
+            console.log(`Deleted column: ${result}`);
+          },
+          (error) => {
+            console.error(error);
+          });
+        }
+      }
+    }
+
     private getTableColumns(countries: CountryModel[]): ColumnModel[] {
-      let columns: ColumnModel[] = ApplicationConstants.DefaultColumnDefinition;
+      let columns: ColumnModel[] = [
+        { columnDef: 'name', header: 'Name',    cell: (country: CountryModel) => `${country.name}` },
+        { columnDef: 'countryCode',     header: 'Country code',   cell: (country: CountryModel) => `${country.countryCode}`     },
+        { columnDef: 'phoneCode',   header: 'Phone code', cell: (country: CountryModel) => `${country.phoneCode}`   }
+      ];
 
       const countryAdditionalData = countries.map(country => country.additionalData);
 

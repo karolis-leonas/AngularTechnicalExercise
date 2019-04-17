@@ -70,9 +70,6 @@ export class RegisterComponent implements OnInit {
 
     onSubmit(): void {
         this.submitted = true;
-        console.log(this.email);
-        console.log(this.password);
-        console.log(this.confirmPassword);
         if (this.registerForm.invalid) {
             return;
         }
@@ -82,9 +79,11 @@ export class RegisterComponent implements OnInit {
             .pipe(first())
             .subscribe(
                 (data) => {
-                    this.router.navigate(['/login']);
+                  console.log(data);
+                  this.router.navigate(['/login']);
                 },
                 (error) => {
+                  console.error(error);
                   this.errorMessage = error;
                   this.loading = false;
                 });
